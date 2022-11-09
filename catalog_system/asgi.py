@@ -1,5 +1,5 @@
 """
-ASGI config for zebrands_catalog_system project.
+ASGI config for catalog_system project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'zebrands_catalog_system.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'catalog_system.settings')
 
 application = get_asgi_application()
