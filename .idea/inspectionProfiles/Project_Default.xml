@@ -26,6 +26,8 @@
           <option value="contabilidad.views.asientosContab.*" />
           <option value="contabilidad.bl.contabilidad_helper.asientoHelper.*" />
           <option value="poliza.bl.Json_poliza_helper.CreacionDePoliza.__getitem__" />
+          <option value="type.without_ui" />
+          <option value="type.with_ui" />
         </list>
       </option>
     </inspection_tool>
