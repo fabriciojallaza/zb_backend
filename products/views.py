@@ -23,8 +23,8 @@ class ProductView(generics.RetrieveAPIView):
         Return a product by its id. If user is not authenticated, visits are incremented.
     """
     queryset = ''
-    serializer_class = ProductSerializer
     authentication_classes = (TokenAuthentication,)
+    serializer_class = ProductSerializer
 
     def get_object(self) -> object:
         """
@@ -43,9 +43,9 @@ class ProductCreate(generics.CreateAPIView):
     post:
         Create a new product. Only authenticated users can create products.
     """
-    serializer_class = ProductSerializerAdmin
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
+    serializer_class = ProductSerializerAdmin
 
 
 class ProductControl(generics.RetrieveUpdateDestroyAPIView):
@@ -63,9 +63,9 @@ class ProductControl(generics.RetrieveUpdateDestroyAPIView):
         Delete a product. Only authenticated users can delete products.
     """
     queryset = ''
-    serializer_class = ProductSerializerAdmin
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
+    serializer_class = ProductSerializerAdmin
 
     def get_object(self) -> object:
         """ Return a product by its id
