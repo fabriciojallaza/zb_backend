@@ -11,5 +11,5 @@ urlpatterns = [
     path('manage/<int:pk>/', views.ProductManage.as_view(), name='product_manage'),
 
 ]
-urlpatterns = format_suffix_patterns(urlpatterns)
+#urlpatterns = format_suffix_patterns(urlpatterns)
 

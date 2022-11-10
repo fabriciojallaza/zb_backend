@@ -54,6 +54,7 @@ class UserManage(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializerAdmin
     authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    queryset = ''
 
     def get_object(self):
         """ Return a user by its id """
