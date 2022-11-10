@@ -7,6 +7,7 @@ from datetime import datetime
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    """Serializer for product objects, display for non-admin users"""
     class Meta:
         model = Product
         fields = ('sku', 'name', 'price', 'brand', 'visits','is_active')
@@ -14,6 +15,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializerAdmin(serializers.ModelSerializer):
+    """Serializer for product objects, display for admin users"""
     class Meta:
         model = Product
         fields = '__all__'
@@ -21,8 +23,8 @@ class ProductSerializerAdmin(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """Create and return a new `Product` instance, given the validated data.
-        :param validated_data:
-        :rtype: object
+        :param validated_data: dict
+        :rtype: object Product
         """
         try:
             product = Product.objects.create(created_at=make_aware(datetime.now()), **validated_data)
@@ -32,9 +34,9 @@ class ProductSerializerAdmin(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         """Update and return an existing `Product` instance, given the validated data.
-        :param instance: object
+        :param instance: object Product
         :param validated_data: dict
-        :rtype: object
+        :rtype: object Product
         """
         try:
             instance.updated_at = make_aware(datetime.now())
