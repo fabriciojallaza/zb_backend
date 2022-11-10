@@ -27,17 +27,15 @@ schema_view = get_schema_view(
       title="ZB Catalog System API",
       default_version='v1',
       description="Catalog system for ZB",
-      terms_of_service="https://www.google.com/policies/terms/",
+      # terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="fabriciojallaza@gmail.com"),
-      license=openapi.License(name="BSD License"),
+      # license=openapi.License(name="BSD License"),
    ),
    public=True,
    permission_classes=[permissions.AllowAny],
 )
-
+# Rest Framework Frontend View
 router = routers.DefaultRouter()
-router.register(r'users', UserView)
-
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -21,21 +21,21 @@ class TokenCreate(ObtainAuthToken):
 class UserCreate(generics.CreateAPIView):
     """
     post:
-        Creates a new user/admin. Authentication required.
+        Creates a new user/admin. Authentication as admin is required.
     """
     serializer_class = UserSerializerAdmin
     authentication_classes = (authentication.TokenAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
 
 
 class UserView(viewsets.ModelViewSet):
     """
     get:
-        User list. Authentication required.
+        User list. Authentication as admin is required.
     """
     serializer_class = UserSerializerAdmin
     authentication_classes = (authentication.TokenAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = get_user_model().objects.all()
 
 
@@ -43,18 +43,21 @@ class UserManage(generics.RetrieveUpdateDestroyAPIView):
 
     """
     get:
-        Return a user by its id. Authentication required.
+        Return a user by its id. Authentication as admin is required.
+
     put:
-        Update the entire user. Authentication required.
+        Update the entire user. Authentication as admin is required.
+
     patch:
-        Partially update of user. Authentication required.
+        Partially update of user. Authentication as admin is required.
+
     delete:
-        Delete a user by its id. Authentication required.
+        Delete a user by its id. Authentication as admin is required.
     """
     serializer_class = UserSerializerAdmin
-    authentication_classes = (authentication.TokenAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
     queryset = ''
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
 
     def get_object(self):
         """ Return a user by its id """
@@ -62,7 +65,7 @@ class UserManage(generics.RetrieveUpdateDestroyAPIView):
         return user
 
     def delete(self, request, *args, **kwargs):
+        """ Delete a user by its id """
         user = get_object_or_404(get_user_model(), id=self.kwargs['pk'])
         user.delete()
-
         return HttpResponse(status=200)
