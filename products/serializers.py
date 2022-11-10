@@ -1,7 +1,7 @@
 from django.utils.timezone import make_aware
 from rest_framework import serializers, status
 from rest_framework.response import Response
-
+from utils.email_handler import email_handler
 from core.models import Product
 from datetime import datetime
 
@@ -42,7 +42,7 @@ class ProductSerializerAdmin(serializers.ModelSerializer):
             instance.updated_at = make_aware(datetime.now())
             product = super().update(instance, validated_data)
             # Send an email to admins if product is updated
-            #product_update_email(product)
+            email_handler(product)
             return product
         except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            raise serializers.ValidationError(e)

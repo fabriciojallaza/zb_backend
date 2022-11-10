@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'products.apps.ProductsConfig',
     'user.apps.UserConfig',
+    'django_ses',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+#EMAIL SETTINGS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'AKIAS2P2UKHVLBG7SPWZ'
+EMAIL_HOST_PASSWORD = 'BH0f6Qu44pJQPVKms6FNvs+iDDwk0eEcU6C8xGAO1fED'
+EMAIL_USE_TLS = True
