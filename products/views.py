@@ -24,7 +24,7 @@ class ProductView(generics.RetrieveAPIView):
         Return a product by its id. If user is not authenticated, visits are incremented.
     """
     serializer_class = ProductSerializer
-
+    queryset = ''
     def get_object(self) -> object:
         """
         :rtype: object
@@ -61,6 +61,7 @@ class ProductManage(generics.RetrieveUpdateDestroyAPIView):
         Delete a product. Only authenticated users can delete products.
     """
     serializer_class = ProductSerializerAdmin
+    queryset = ''
 
     def get_object(self) -> object:
         """ Return a product by its id.
