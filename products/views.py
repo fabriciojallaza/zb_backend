@@ -1,11 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
-from rest_framework import status, viewsets, generics
+from django.shortcuts import get_object_or_404
+from rest_framework import viewsets, generics
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from core.models import Product
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
 from products.serializers import ProductSerializer, ProductSerializerAdmin
 
 
@@ -23,15 +22,16 @@ class ProductView(generics.RetrieveAPIView):
     get:
         Return a product by its id. If user is not authenticated, visits are incremented.
     """
-    serializer_class = ProductSerializer
     queryset = ''
+    serializer_class = ProductSerializer
+    authentication_classes = (TokenAuthentication,)
+
     def get_object(self) -> object:
         """
-        :rtype: object
+        :rtype: object Product
         """
         product = get_object_or_404(Product, pk=self.kwargs['pk'])
-
-        # If user is not authenticated, visits are incremented
+        # If user is not authenticated, visits field is incremented
         if not self.request.user.is_authenticated:
             product.visits += 1
             product.save()
@@ -44,9 +44,11 @@ class ProductCreate(generics.CreateAPIView):
         Create a new product. Only authenticated users can create products.
     """
     serializer_class = ProductSerializerAdmin
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
 
-class ProductManage(generics.RetrieveUpdateDestroyAPIView):
+class ProductControl(generics.RetrieveUpdateDestroyAPIView):
     """
     get:
         Return a product by its id. Authentication required in order to not increment visits field.
@@ -60,18 +62,20 @@ class ProductManage(generics.RetrieveUpdateDestroyAPIView):
     delete:
         Delete a product. Only authenticated users can delete products.
     """
-    serializer_class = ProductSerializerAdmin
     queryset = ''
+    serializer_class = ProductSerializerAdmin
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
     def get_object(self) -> object:
-        """ Return a product by its id.
-        :rtype: object
+        """ Return a product by its id
+        :rtype: object Product
         """
         product = get_object_or_404(Product, id=self.kwargs['pk'])
         return product
 
     def delete(self, request, *args, **kwargs):
-        """
+        """ Delete a product
         :param request: HttpRequest
         :param args: object
         :param kwargs: object
