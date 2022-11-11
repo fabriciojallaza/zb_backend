@@ -20,16 +20,12 @@ from rest_framework import permissions, routers
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from user.views import UserView
-
 schema_view = get_schema_view(
    openapi.Info(
       title="ZB Catalog System API",
       default_version='v1',
       description="Catalog system for ZB",
-      # terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="fabriciojallaza@gmail.com"),
-      # license=openapi.License(name="BSD License"),
    ),
    public=True,
    permission_classes=[permissions.AllowAny],
@@ -40,6 +36,7 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     # Router
+    # V1 versioned API
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),

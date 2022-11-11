@@ -37,8 +37,8 @@ class UserAnonTests(TestCase):
 
     def test_viewusers_noauth_fail(self):
         """Tests that unauthorized users cannot view users"""
-        create_user(username='test1', password='test33')
-        create_user(username='test2', password='test44')
+        create_user(username='test1', email='test1@test.com', password='test33')
+        create_user(username='test2', email='test2@test.com', password='test44')
         result = self.client.get(USER_LISTURL)
         self.assertEqual(result.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -53,32 +53,9 @@ class UserAdminTests(TestCase):
     """Tests for user api for admin users"""
 
     def setUp(self):
-        self.user = create_user(username='admin', password='password123', is_staff=True, date_joined=make_aware(datetime.now()))
+        self.user = create_user(username='admin', email='admintest@admin.com', password='password123', is_staff=True, date_joined=make_aware(datetime.now()))
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
-
-    def test_userviews_success(self):
-        """Tests Viewset for admin users"""
-        create_user(username='admin1', password='password123')
-        create_user(username='admin2', password='password123')
-        result = self.client.get(USER_LISTURL)
-        users = get_user_model().objects.all()
-        serializer = UserSerializerAdmin(users, many=True)
-        self.assertEqual(result.status_code, status.HTTP_200_OK)
-        self.assertEqual(result.data, serializer.data)
-
-    def test_createuser_duplicate_fail(self):
-        """Tests that duplicate users cannot be created"""
-        payload = {'username': 'test1', 'password': 'password123', }
-        result = self.client.post(USER_CREATEURL, payload)
-        self.assertEqual(result.status_code, status.HTTP_400_BAD_REQUEST)
-
-    def test_authtoken_missingfield_fail(self):
-        """Tests for missing fields"""
-        payload = {'username': 'admin', 'password': ''}
-        response = self.client.post(TOKEN_URL, payload)
-        self.assertNotIn('token', response.data)
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_authtoken_invalidcred_fail(self):
         """Tests for invalid credentials"""
@@ -100,6 +77,38 @@ class UserAdminTests(TestCase):
         result = self.client.post(TOKEN_URL, payload)
         self.assertIn('token', result.data)
         self.assertEqual(result.status_code, status.HTTP_200_OK)
+
+    def test_authtoken_missingfield_fail(self):
+        """Tests for missing fields"""
+        payload = {'username': 'admin', 'password': ''}
+        response = self.client.post(TOKEN_URL, payload)
+        self.assertNotIn('token', response.data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_userviews_success(self):
+        """Tests Viewset for admin users"""
+        create_user(username='admin1', email='adminemail1@admin.com', password='password123')
+        create_user(username='admin2', email='adminemail2@admin.com', password='password123')
+        result = self.client.get(USER_LISTURL)
+        users = get_user_model().objects.all()
+        serializer = UserSerializerAdmin(users, many=True)
+        self.assertEqual(result.status_code, status.HTTP_200_OK)
+        self.assertEqual(result.data, serializer.data)
+
+    def test_createuser_success(self):
+        """Tests that admin users can create users"""
+        data = { 'username': 'testuser', 'email': 'new_user@test.com', 'password': 'password123'}
+        result = self.client.post(USER_CREATEURL, data)
+        self.assertEqual(result.status_code, status.HTTP_201_CREATED)
+        user = get_user_model().objects.get(**result.data)
+        self.assertTrue(user.check_password(data['password']))
+        self.assertNotIn('password', result.data)
+
+    def test_createuser_duplicate_fail(self):
+        """Tests that duplicate users cannot be created"""
+        payload = {'username': 'test1', 'password': 'password123', }
+        result = self.client.post(USER_CREATEURL, payload)
+        self.assertEqual(result.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_useradminviewset_success(self):
         """Test retrieving profile for existent user"""
