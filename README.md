@@ -1,5 +1,7 @@
 # Catalog System REST API
 
+###### Zebrands Backend Test
+
 A RESTful API for a catalog system to manage products. The API is built using Django, Django REST Framework, SQLite, AWS SES, Swagger, Redoc. 
 
 This system has two main models: Product and User. A Product has a sku, name, price, brand, creation date, edition date and amount of visits. A User has a username, email, password and creation date.
@@ -155,6 +157,7 @@ password: admin_pass123
 Documentation for the API can be found under the following links:
 * Swager UI: http://127.0.0.1:8000/docs/
 * Redoc: http://127.0.0.1:8000/redoc/
+* 
 To Test the API follow the instructions in the end of this document.
 
 ### /v1/products/
