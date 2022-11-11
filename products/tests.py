@@ -30,7 +30,6 @@ class ProductsAnonTests(TestCase):
 
     def test_viewproducts_success(self):
         """Tests that products are listed for anonymous users"""
-        # Insert 2 dummy products
         Product.objects.create(sku='PROD-1', name='Razer Vyper', price=55.77, brand='Razer',
                                created_at=make_aware(datetime.now()))
         Product.objects.create(sku='PROD-2', name='Razer Kraken', price=20.0, brand='Razer 2',

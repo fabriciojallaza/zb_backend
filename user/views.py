@@ -22,6 +22,7 @@ class UserCreate(generics.CreateAPIView):
     """
     post:
         Creates a new user/admin. Authentication as admin is required.
+        If is_staff is True, user is admin.
     """
     serializer_class = UserSerializerAdmin
     authentication_classes = (authentication.TokenAuthentication,)

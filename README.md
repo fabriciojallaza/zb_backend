@@ -1,19 +1,19 @@
-# Instalacion en Linux
+# Linux Installation
 
-## Instalar virtualenv
+## Install virtualenv
 
 ~~~bash
 sudo apt-get install python3-pip
 sudo pip3 install virtualenv
 ~~~
 
-## Instalar sqlite
+## Install sqlite
 
 ~~~bash
 sudo apt-get install sqlite3
 ~~~
 
-## Clonar repo
+## Clone the repository
 
 ~~~bash
 # Mediante protocolo https
@@ -23,27 +23,33 @@ git clone https://github.com/fabriciojallaza/zb_backend.git
 git clone git@github.com:fabriciojallaza/zb_backend.git
 ~~~
 
-## Creamos en entorno virtual
+## Create virtualenv
 
 ~~~bash
 python3 -m virtualenv venv
 ~~~
 
-## Instalación de dependencias
+## Install dependencies
 
-### Activamos el virtualenv:
+### Activate virtualenv:
 
 ~~~bash
 source venv/local/bin/activate
 ~~~
 
-### Instalamos los requerimientos
+### Install requirements:
 
 ~~~bash
 pip install -r requirements.txt
 ~~~
 
-### Corremos el Proyecto:
+### Initialize setup:
+
+~~~bash
+python manage.py zb-setup
+~~~
+
+### Run server:
 
 ~~~bash
 python manage.py runserver
@@ -60,6 +66,11 @@ python manage.py runserver
 │   ├── urls.py
 │   └── wsgi.py
 ├── core
+│   ├── management
+│   │   └── __init__.py
+│   │   ├── commands
+│   │   │   ├── __init__.py
+│   │   │   └── zb-setup.py
 │   ├── admin.py
 │   ├── apps.py
 │   ├── __init__.py
