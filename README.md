@@ -1,17 +1,15 @@
 # Linux Installation
 
-## Install virtualenv
+## Install requirements for Linux
 
 ~~~bash
+sudo apt update
 sudo apt-get install python3-pip
 sudo pip3 install virtualenv
-~~~
-
-## Install sqlite
-
-~~~bash
+sudo apt-get install git-all
 sudo apt-get install sqlite3
 ~~~
+
 
 ## Clone the repository
 
@@ -37,7 +35,7 @@ python3 -m virtualenv venv
 source venv/local/bin/activate
 ~~~
 
-### Install requirements:
+### Install requirements for virtualenv:
 
 ~~~bash
 pip install -r requirements.txt
