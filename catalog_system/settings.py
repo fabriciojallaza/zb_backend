@@ -149,3 +149,14 @@ EMAIL_USE_TLS = True
 
 #LOGIN URL
 LOGIN_URL = 'v1/user/authtoken/'
+
+# SWAGGER SETTINGS
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+}
