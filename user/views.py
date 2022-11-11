@@ -12,7 +12,8 @@ from user.serializers import UserSerializerAdmin, UserSerializerToken
 class TokenCreate(ObtainAuthToken):
     """
     post:
-        Creates a new auth token for user. Authentication required.
+        Creates a new auth token for user. Authentication required.\n
+        Token obtained must be used in the header of every request if admin information is required.
     """
     serializer_class = UserSerializerToken
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
@@ -31,12 +32,12 @@ class UserCreate(generics.CreateAPIView):
 
 class UserView(viewsets.ModelViewSet):
     """
-    get:
+    list:
         User list. Authentication as admin is required.
     """
-    serializer_class = UserSerializerAdmin
     authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
+    serializer_class = UserSerializerAdmin
     queryset = get_user_model().objects.all()
 
 
