@@ -195,7 +195,7 @@ Django has a modular design that allows to create a scalable and maintainable ar
 Each module has its own responsibilities and can be easily replaced by another module that performs the same function. Modules that produce data are separated from modules that consume data. This will to increase modifiability because changes are frequently confined to either the production or the consumption side of data.
 
 The proposed architecture is based on the following diagram:
-![Alt](/images/django_arch.png.png?raw=true "Architecture")
+![Alt](/images/django_arch.png "Architecture")
 The flux of data is from left to right. The HTTP request interacts with the view, the view interacts with the controller/serializer and the controller/serializer interacts with the model. The model interacts with the database and the database interacts with the model. 
 It is built to be escalable and maintanaible since each module has its own app and the connection between them is done through the urls.py file. Where other modules can be added. User app can be customized to have more type of users and the third existing one, where a registered user could access fiew admin options. Each module has dates of creation and edition to keep control and can be implemented the username that made the changes.
 
