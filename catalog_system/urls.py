@@ -36,7 +36,7 @@ schema_view = get_schema_view(
 )
 # Rest Framework Frontend View
 router = routers.DefaultRouter()
-router.register(r'user', UserView, basename='user')
+# router.register(r'user', UserView, basename='user')
 
 urlpatterns = [
     path('', include(router.urls)),
