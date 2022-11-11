@@ -40,7 +40,7 @@ git clone git@github.com:fabriciojallaza/zb_backend.git
 python3 -m virtualenv venv
 ~~~
 
-### Activate virtualenv:
+### Activate virtualenv
 
 ~~~bash
 # For python >=3.10
@@ -52,7 +52,7 @@ source venv/bin/activate
 ### Install dependencies
 
 
-#### Install requirements for virtualenv:
+#### Install requirements for virtualenv
 
 ~~~bash
 pip install -r requirements.txt
@@ -70,19 +70,19 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 ~~~
 
-#### Initialize setup:
+#### Initialize setup
 It creates an admin user and populates the database with some products.
 ~~~bash
 python manage.py zb-setup
 ~~~
 
-#### To Run Tests:
+#### To Run Tests
 
 ~~~bash
 python manage.py test
 ~~~
 
-#### Run server:
+#### Run server
 
 ~~~bash
 python manage.py runserver
@@ -157,7 +157,7 @@ password: admin_pass123
 Documentation for the API can be found under the following links:
 * Swager UI: http://127.0.0.1:8000/docs/
 * Redoc: http://127.0.0.1:8000/redoc/
-* 
+
 To Test the API follow the instructions in the end of this document.
 
 ### /v1/products/
