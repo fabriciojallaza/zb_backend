@@ -8,19 +8,12 @@ class AdminAppTests(TestCase):
     def setUp(self):
         """Setup for admin tests"""
         self.client = Client()
-        self.admin_user = get_user_model().objects.create_user(
-            username='admin_user',
-            email='admin_user@admin.com',
-            password='admin_user',
+        self.admin_user = get_user_model().objects.create_user(username='admin_user', email='admin_user@admin.com', password='admin_user',
             is_staff=True,
             is_superuser=True,  # Admin user
         )
         self.client.force_login(self.admin_user)  # Login as admin user
-        self.user = get_user_model().objects.create_user(
-            username='test_user',
-            email='test@test.com',
-            password='pasword123',
-        )
+        self.user = get_user_model().objects.create_user(username='test_user', email='test@test.com', password='pasword123', )
 
     def test_listusers_success(self):
         """Test that users are listed on user page"""
