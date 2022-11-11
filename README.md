@@ -214,3 +214,7 @@ To login into the platform and test the API or make it in the localhost, follow 
 4. Click on the "Authorize" button and paste the token with the word "Token" before the token
 ![Alt](/images/token_auth.png "Authorize")
 5. Now you can test the API
+
+### API Docs Online
+* Swagger UI : [Swagger](http://ec2-3-93-152-219.compute-1.amazonaws.com:8000/docs/)
+* Redoc : [Redoc](http://ec2-3-93-152-219.compute-1.amazonaws.com:8000/redoc/)
