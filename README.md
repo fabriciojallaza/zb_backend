@@ -32,7 +32,10 @@ python3 -m virtualenv venv
 ### Activate virtualenv:
 
 ~~~bash
+# For python >=3.10
 source venv/local/bin/activate
+# For python <3.10
+source venv/bin/activate
 ~~~
 
 ### Install requirements for virtualenv:
