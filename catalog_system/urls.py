@@ -39,14 +39,14 @@ router = routers.DefaultRouter()
 # router.register(r'user', UserView, basename='user')
 
 urlpatterns = [
+    # Router
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
-    url('products/', include('products.urls')),
-    url('user/', include('user.urls')),
+    url('v1/products/', include('products.urls')),
+    url('v1/user/', include('user.urls')),
 
     # documentation
     re_path(r'^docs/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-
 ]
