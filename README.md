@@ -43,6 +43,17 @@ source venv/local/bin/activate
 pip install -r requirements.txt
 ~~~
 
+### Introduce your own settings for email configuration in settings.py file:
+
+~~~python
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'your.host'
+EMAIL_HOST_USER = 'your.user'
+EMAIL_HOST_PASSWORD = 'your.password'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+~~~
+
 ### Initialize setup:
 
 ~~~bash
@@ -54,6 +65,18 @@ python manage.py zb-setup
 ~~~bash
 python manage.py runserver
 ~~~
+
+### To Run Tests:
+
+~~~bash
+python manage.py test
+~~~
+
+To login into the platform as admin, use the following credentials:
+
+username: admin_user
+
+password: admin_pass123
 
 ## Working tree
 

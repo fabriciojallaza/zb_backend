@@ -148,4 +148,4 @@ EMAIL_HOST_PASSWORD = 'BH0f6Qu44pJQPVKms6FNvs+iDDwk0eEcU6C8xGAO1fED'
 EMAIL_USE_TLS = True
 
 #LOGIN URL
-LOGIN_URL = '/user/authtoken/'
+LOGIN_URL = 'v1/user/authtoken/'
