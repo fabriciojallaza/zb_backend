@@ -201,7 +201,7 @@ The flux of data is from left to right. The HTTP request interacts with the view
 It is built to be escalable and maintanaible since each module has its own app and the connection between them is done through the urls.py file. Where other modules can be added. User app can be customized to have more type of users and the third existing one, where a registered user could access fiew admin options. Each module has dates of creation and edition to keep control and can be implemented the username that made the changes.
 
 
-# Deployment
+# Deployment (online 10/11/22)(offline since 23/11/22 due to no response of recruiter - and billing costs)
 The API is deployed in AWS EC2 instance. The instance is configured to run the API using gunicorn and nginx. The API is served in the following endpoint: [Catalog System API Online - AWS EC2](http://ec2-3-93-152-219.compute-1.amazonaws.com:8000/)
 
 To login into the platform and test the API or make it in the localhost, follow this link: [Catalog System Docs](http://ec2-3-93-152-219.compute-1.amazonaws.com:8000/v1/docs/)
